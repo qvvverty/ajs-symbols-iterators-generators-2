@@ -28,20 +28,9 @@ export default class Team {
     ];
   }
 
-  [Symbol.iterator]() {
-    let currentMemberCounter = 0;
-    const { members } = this;
-    return {
-      next() {
-        if (currentMemberCounter < members.length) {
-          currentMemberCounter += 1;
-          return {
-            value: members[currentMemberCounter - 1],
-            done: false,
-          };
-        }
-        return { done: true };
-      },
-    };
+  * [Symbol.iterator]() {
+    for (let i = 0; i < this.members.length; i += 1) {
+      yield this.members[i];
+    }
   }
 }
